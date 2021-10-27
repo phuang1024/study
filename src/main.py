@@ -17,6 +17,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+import sys
 import os
 import random
 import json
@@ -73,7 +74,8 @@ def format_doc(prompt, correct, wrong):
 
 
 def main():
-    server = HTTPServer(("", 8080), Handler)
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
+    server = HTTPServer(("", port), Handler)
     server.serve_forever()
 
 
