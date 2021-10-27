@@ -51,8 +51,13 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def load_vocab():
-    with open(os.path.join(PARENT, "vocab.json"), "r") as fp:
-        return json.load(fp)
+    data = {}
+    for fname in os.listdir(PARENT):
+        if "vocab" in fname and fname.endswith(".json"):
+            with open(os.path.join(PARENT, "vocab.json"), "r") as fp:
+                data = {**data, **json.load(fp)}
+
+    return data
 
 
 def format_doc(prompt, correct, wrong):
