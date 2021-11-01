@@ -27,7 +27,7 @@ MAIN = os.path.join(PARENT, "main.py")
 
 def main():
     while True:
-        proc = subprocess.Popen(["python3", MAIN])
+        proc = subprocess.Popen(["python3", MAIN, "80"])
         time.sleep(3600)
         proc.kill()
 
