@@ -19,7 +19,12 @@
 
 import sys
 import os
+import random
+import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
+PARENT = os.path.dirname(os.path.abspath(__file__))
+VOCAB_DIR = os.path.join(PARENT, "..", "words")
 
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -31,9 +36,9 @@ class RequestHandler(BaseHTTPRequestHandler):
             args = {}
 
         if path == "/":
-            self.send_file("html/index.html")
+            self.send_200(format_doc(load_doc("html/index.html"), HEAD=load_doc("html/head.html")))
         elif path == "/style.css":
-            self.send_file("css/style.css", "text/css")
+            self.send_200(load_doc("css/style.css"), ctype="text/css")
         else:
             self.send_404()
 
@@ -43,12 +48,49 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"<h1>404</h1>")
 
-    def send_file(self, path, ctype="text/html"):
-        with open(path, "rb") as f:
-            self.send_response(200)
-            self.send_header("content-type", ctype)
-            self.end_headers()
-            self.wfile.write(f.read())
+    def send_200(self, data, ctype="text/html"):
+        self.send_response(200)
+        self.send_header("content-type", ctype)
+        self.end_headers()
+        self.wfile.write(data.encode())
+
+
+def load_vocab():
+    data = {}
+    for fname in os.listdir(VOCAB_DIR):
+        if fname.endswith(".json"):
+            with open(os.path.join(VOCAB_DIR, fname), "r") as fp:
+                data = {**data, **json.load(fp)}
+
+    return data
+
+def pick_words(vocab):
+    words = random.sample(list(vocab.keys()), 4)
+    if random.random() < 0.5:
+        prompt = vocab[words[0]]
+        correct = words[0]
+        wrong = words[1:]
+    else:
+        prompt = words[0]
+        correct = vocab[words[0]]
+        wrong = [vocab[i] for i in words[1:]]
+
+    return (prompt, correct, wrong)
+
+def load_doc(path):
+    with open(os.path.join(PARENT, path), "r") as fp:
+        return fp.read()
+
+def format_doc(doc, **kwargs):
+    final = ""
+    for line in doc.split("\n"):
+        for key, val in kwargs.items():
+            if "FORMAT" in line and key in line:
+                line = val
+                break
+        final += line + "\n"
+
+    return final
 
 
 def main():
