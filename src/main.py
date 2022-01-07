@@ -36,9 +36,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             args = {}
 
         if path == "/":
-            self.send_200(format_doc(load_doc("html/index.html"), HEAD=load_doc("html/head.html")))
+            self.send_200(format_doc(load_doc("html/index.html"), load_doc("html/head.html")))
         elif path == "/style.css":
             self.send_200(load_doc("css/style.css"), ctype="text/css")
+        elif path == "/multchoice":
+            prompt, correct, wrong = pick_words(load_vocab())
+            correct_html = f"<a href=\"/multchoice\">{correct}</a>"
+            wrong_html = [f"<a href=\"/wrong?correct={correct}\">{i}</a>" for i in wrong]
+            words = [correct_html, *wrong_html]
+            random.shuffle(words)
+            self.send_200(format_doc(load_doc("html/multchoice.html"), load_doc("html/head.html"), prompt, *words))
         else:
             self.send_404()
 
@@ -81,13 +88,12 @@ def load_doc(path):
     with open(os.path.join(PARENT, path), "r") as fp:
         return fp.read()
 
-def format_doc(doc, **kwargs):
+def format_doc(doc, *args):
+    args = list(args)
     final = ""
     for line in doc.split("\n"):
-        for key, val in kwargs.items():
-            if "FORMAT" in line and key in line:
-                line = val
-                break
+        if "FORMAT" in line:
+            line = args.pop(0)
         final += line + "\n"
 
     return final
