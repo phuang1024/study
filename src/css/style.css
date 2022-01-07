@@ -1,0 +1,16 @@
+html {
+    background-color: black;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-family: ubuntu;
+    font-size: 32px;
+}
+
+p {
+    color: white;
+    font-family: ubuntu;
+    font-size: 16px;
+}
