@@ -48,6 +48,12 @@ SPECIAL_CHARS = {
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        try:
+            self.do_GET_real()
+        except (ValueError, KeyError):
+            self.send_500()
+    
+    def do_GET_real(self):
         path = os.path.abspath(self.path.split("?")[0])
         try:
             args = {k: v for k, v in [x.split("=") for x in self.path.split("?")[1].split("&")]}
@@ -83,6 +89,12 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.send_header("content-type", "text/html")
         self.end_headers()
         self.wfile.write(b"<h1>404</h1>")
+
+    def send_500(self):
+        self.send_response(500)
+        self.send_header("content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(b"<h1>500</h1>")
 
     def send_200(self, data, ctype="text/html"):
         self.send_response(200)
