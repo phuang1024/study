@@ -20,11 +20,14 @@
 import sys
 import os
 import random
+import string
 import json
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 PARENT = os.path.dirname(os.path.abspath(__file__))
 VOCAB_DIR = os.path.join(PARENT, "..", "words")
+
+ASCII_ENCODE = "abcdefghijklmnop"
 
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -36,16 +39,22 @@ class RequestHandler(BaseHTTPRequestHandler):
             args = {}
 
         if path == "/":
-            self.send_200(format_doc(load_doc("html/index.html"), load_doc("html/head.html")))
+            self.send_200(load_doc("html/index.html"))
         elif path == "/style.css":
             self.send_200(load_doc("css/style.css"), ctype="text/css")
         elif path == "/multchoice":
             prompt, correct, wrong = pick_words(load_vocab())
+            prompt_id, correct_id = map(encode_ascii, (prompt, correct))
             correct_html = f"<a href=\"/multchoice\">{correct}</a>"
-            wrong_html = [f"<a href=\"/wrong?correct={correct}\">{i}</a>" for i in wrong]
+            wrong_html = [f"<a href=\"/multchoice/wrong?prompt={prompt_id}&choice={encode_ascii(i)}&correct={correct_id}\">{i}</a>" for i in wrong]
             words = [correct_html, *wrong_html]
             random.shuffle(words)
-            self.send_200(format_doc(load_doc("html/multchoice.html"), load_doc("html/head.html"), prompt, *words))
+            self.send_200(load_doc("html/multchoice.html").format(prompt, *words))
+        elif path == "/multchoice/wrong":
+            prompt = decode_ascii(args["prompt"])
+            correct = decode_ascii(args["correct"])
+            choice = decode_ascii(args["choice"])
+            self.send_200(load_doc("html/multchoice-wrong.html").format(prompt, correct, choice))
         else:
             self.send_404()
 
@@ -60,6 +69,27 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.send_header("content-type", ctype)
         self.end_headers()
         self.wfile.write(data.encode())
+
+
+def encode_ascii(data):
+    encoded = []
+
+    for byte in data.encode():
+        encoded.append(ASCII_ENCODE[byte & 0x0F])
+        encoded.append(ASCII_ENCODE[(byte & 0xF0) >> 4])
+
+    return "".join(encoded)
+
+def decode_ascii(data):
+    decoded = []
+
+    for i in range(0, len(data), 2):
+        decoded.append(
+            ASCII_ENCODE.index(data[i]) |
+            (ASCII_ENCODE.index(data[i+1]) << 4)
+        )
+
+    return bytes(decoded).decode()
 
 
 def load_vocab():
@@ -84,9 +114,15 @@ def pick_words(vocab):
 
     return (prompt, correct, wrong)
 
-def load_doc(path):
+def load_doc(path, add_header=True):
     with open(os.path.join(PARENT, path), "r") as fp:
-        return fp.read()
+        data = fp.read()
+
+    if add_header:
+        with open(os.path.join(PARENT, "html/head.html"), "r") as fp:
+            data = data.replace("{}", fp.read(), 1)
+
+    return data
 
 def format_doc(doc, *args):
     args = list(args)
