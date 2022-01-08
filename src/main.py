@@ -50,8 +50,9 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
             self.do_GET_real()
-        except (ValueError, KeyError):
+        except (ValueError, KeyError) as e:
             self.send_500()
+            print(e)
     
     def do_GET_real(self):
         path = os.path.abspath(self.path.split("?")[0])
