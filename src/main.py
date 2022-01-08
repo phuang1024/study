@@ -45,8 +45,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         elif path == "/multchoice":
             prompt, correct, wrong = pick_words(load_vocab())
             prompt_id, correct_id = map(encode_ascii, (prompt, correct))
-            correct_html = f"<a href=\"/multchoice\">{correct}</a>"
-            wrong_html = [f"<a href=\"/multchoice/wrong?prompt={prompt_id}&choice={encode_ascii(i)}&correct={correct_id}\">{i}</a>" for i in wrong]
+            base_html = "<a href=\"/multchoice/{2}?prompt={0}&choice={3}&correct={1}\">{4}</a>" \
+                .format(prompt_id, correct_id, *"{} {} {}".split())
+            correct_html = base_html.format("", prompt_id, correct)
+            wrong_html = [base_html.format("wrong", encode_ascii(i), i) for i in wrong]
             words = [correct_html, *wrong_html]
             random.shuffle(words)
             self.send_200(load_doc("html/multchoice.html").format(prompt, *words))
