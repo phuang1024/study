@@ -29,6 +29,22 @@ VOCAB_DIR = os.path.join(PARENT, "..", "words")
 
 ASCII_ENCODE = "abcdefghijklmnop"
 
+SPECIAL_CHARS = {
+    "A'": "&Aacute;",
+    "a'": "&aacute;",
+    "E'": "&Eacute;",
+    "e'": "&eacute;",
+    "I'": "&Iacute;",
+    "i'": "&iacute;",
+    "O'": "&Oacute;",
+    "o'": "&oacute;",
+    "U'": "&Uacute;",
+    "u'": "&uacute;",
+
+    "N~": "&Ntilde;",
+    "n~": "&ntilde;",
+}
+
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -96,12 +112,26 @@ def decode_ascii(data):
     return bytes(decoded).decode()
 
 
-def load_vocab():
+def repspecial(text):
+    """
+    Replace with HTML accent characters.
+    """
+    for k, v in SPECIAL_CHARS.items():
+        text = text.replace(k, v)
+    return text
+
+def load_vocab(replace_special=True):
     data = {}
     for fname in os.listdir(VOCAB_DIR):
         if fname.endswith(".json"):
             with open(os.path.join(VOCAB_DIR, fname), "r") as fp:
                 data = {**data, **json.load(fp)}
+
+    if replace_special:
+        new_data = {}
+        for k, v in data.items():
+            new_data[repspecial(k)] = repspecial(v)
+        data = new_data
 
     return data
 
