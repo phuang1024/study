@@ -42,6 +42,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_200(load_doc("html/index.html"))
         elif path == "/style.css":
             self.send_200(load_doc("css/style.css"), ctype="text/css")
+        elif path == "/about":
+            self.send_200(load_doc("html/about.html"))
         elif path == "/multchoice":
             prompt, correct, wrong = pick_words(load_vocab())
             prompt_id, correct_id = map(encode_ascii, (prompt, correct))

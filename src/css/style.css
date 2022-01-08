@@ -20,3 +20,9 @@ a {
     font-family: ubuntu;
     font-size: 16px;
 }
+
+.header {
+    background-color: #161616;
+    padding: 20px;
+    text-align: center;
+}
