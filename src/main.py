@@ -184,11 +184,9 @@ def format_doc(doc, *args):
 
 def main():
     port = 80 if len(sys.argv) == 1 else int(sys.argv[1])
-
-    while True:
-        server = HTTPServer(("", port), RequestHandler)
-        for _ in range(1000):
-            server.handle_request()
+    server = HTTPServer(("", port), RequestHandler)
+    for _ in range(1000):
+        server.handle_request()
 
 
 main()
