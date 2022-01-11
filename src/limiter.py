@@ -58,7 +58,7 @@ class Limiter:
         now = time.time()
         self.reqs[ip].append(now)
         max_limit = self.limits[-1][1]
-        while now - self.reqs[ip][0] > max_limit:
+        while len(self.reqs[ip]) > 0 and now - self.reqs[ip][0] > max_limit:
             self.reqs[ip].pop(0)
 
         return True

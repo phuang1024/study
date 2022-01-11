@@ -32,11 +32,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             return [36, 24, 18]
 
     def do_GET(self):
-        from limiter import limiter
-        if limiter.request(self.client_address[0]):
-            self.do_GET_real()
-        else:
-            self.send_code(429, "Too many requests")
+        try:
+            from limiter import limiter
+            if limiter.request(self.client_address[0]):
+                self.do_GET_real()
+            else:
+                self.send_code(429, "Too many requests")
+
+        except Exception as e:
+            print(e)
+            self.send_code(500)
     
     def do_GET_real(self):
         path = os.path.abspath(self.path.split("?")[0])

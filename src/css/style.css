@@ -1,6 +1,9 @@
 * {
     margin: 0;
     padding: 0;
+
+    color: white;
+    font-family: Ubuntu;
 }
 
 html {
@@ -8,8 +11,6 @@ html {
 }
 
 h1, h2, p, a {
-    color: white;
-    font-family: Ubuntu;
     padding-bottom: 15px;
 }
 
