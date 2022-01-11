@@ -64,4 +64,4 @@ class Limiter:
         return True
 
 
-limiter = Limiter(((200, 300), (3000, 3600)), ())
+limiter = Limiter(((300, 300), (3000, 3600)), ())
