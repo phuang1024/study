@@ -17,16 +17,25 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-import sys
-from http.server import HTTPServer
-from handler import RequestHandler
+import os
 
+PARENT = os.path.dirname(os.path.abspath(__file__))
+VOCAB_DIR = os.path.join(PARENT, "..", "words")
 
-def main():
-    port = 80 if len(sys.argv) == 1 else int(sys.argv[1])
-    server = HTTPServer(("", port), RequestHandler)
-    for _ in range(1000):
-        server.handle_request()
+ASCII_ENCODE = "abcdefghijklmnop"
 
+SPECIAL_CHARS = {
+    "A'": "&Aacute;",
+    "a'": "&aacute;",
+    "E'": "&Eacute;",
+    "e'": "&eacute;",
+    "I'": "&Iacute;",
+    "i'": "&iacute;",
+    "O'": "&Oacute;",
+    "o'": "&oacute;",
+    "U'": "&Uacute;",
+    "u'": "&uacute;",
 
-main()
+    "N~": "&Ntilde;",
+    "n~": "&ntilde;",
+}
