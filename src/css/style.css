@@ -1,28 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 html {
     background-color: black;
 }
 
-h1 {
+h1, h2, p, a {
     color: white;
+    font-family: Ubuntu;
+    padding-bottom: 15px;
+}
+
+h1, h2 {
     text-align: center;
-    font-family: ubuntu;
-    font-size: 32px;
 }
 
-p {
-    color: white;
-    font-family: ubuntu;
-    font-size: 16px;
+h1 {
+    font-size: 48px;
 }
 
-a {
-    color: white;
-    font-family: ubuntu;
-    font-size: 16px;
+h2 {
+    font-size: 36px;
+}
+
+p, a {
+    font-size: 24px;
 }
 
 .header {
     background-color: #161616;
+    margin-bottom: 20px;
     padding: 20px;
     text-align: center;
+}
+
+.header a {
+    padding: 10px;
+}
+
+.multchoice {
+    padding-left: 15px;
 }
