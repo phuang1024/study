@@ -47,12 +47,19 @@ SPECIAL_CHARS = {
 
 
 class RequestHandler(BaseHTTPRequestHandler):
+    def _get_css_sizes(self):
+        mobile = "User-Agent" in self.headers and "Mobile" in self.headers["User-Agent"]
+
+        if mobile:
+            return [80, 60, 40]
+        else:
+            return [36, 24, 18]
+
     def do_GET(self):
-        try:
+        # try:
             self.do_GET_real()
-        except (ValueError, KeyError) as e:
-            self.send_500()
-            print(e)
+        # except (ValueError, KeyError) as e:
+            # self.send_500()
     
     def do_GET_real(self):
         path = os.path.abspath(self.path.split("?")[0])
@@ -63,10 +70,16 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         if path == "/":
             self.send_200(load_doc("html/index.html"))
+
         elif path == "/style.css":
-            self.send_200(load_doc("css/style.css"), ctype="text/css")
+            doc = load_doc("css/style.css", add_header=False)
+            for size in self._get_css_sizes():
+                doc = doc.replace("SIZE", str(size), 1)
+            self.send_200(doc, ctype="text/css")
+
         elif path == "/about":
             self.send_200(load_doc("html/about.html"))
+
         elif path == "/multchoice":
             prompt, correct, wrong = pick_words(load_vocab())
             prompt_id, correct_id = map(encode_ascii, (prompt, correct))
@@ -77,11 +90,13 @@ class RequestHandler(BaseHTTPRequestHandler):
             words = [correct_html, *wrong_html]
             random.shuffle(words)
             self.send_200(load_doc("html/multchoice.html").format(prompt, *words))
+
         elif path == "/multchoice/wrong":
             prompt = decode_ascii(args["prompt"])
             correct = decode_ascii(args["correct"])
             choice = decode_ascii(args["choice"])
             self.send_200(load_doc("html/multchoice-wrong.html").format(prompt, correct, choice))
+
         else:
             self.send_404()
 

@@ -18,15 +18,15 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: SIZEpx;
 }
 
 h2 {
-    font-size: 36px;
+    font-size: SIZEpx;
 }
 
 p, a {
-    font-size: 24px;
+    font-size: SIZEpx;
 }
 
 .header {
