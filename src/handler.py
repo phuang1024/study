@@ -32,7 +32,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             return [36, 24, 18]
 
     def do_GET(self):
-        self.do_GET_real()
+        from limiter import limiter
+        if limiter.request(self.client_address[0]):
+            self.do_GET_real()
+        else:
+            self.send_code(429, "Too many requests")
     
     def do_GET_real(self):
         path = os.path.abspath(self.path.split("?")[0])
@@ -71,19 +75,15 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_200(load_doc("html/multchoice-wrong.html").format(prompt, correct, choice))
 
         else:
-            self.send_404()
+            self.send_code(404)
 
-    def send_404(self):
-        self.send_response(404)
+    def send_code(self, code, msg=None):
+        if msg is None:
+            msg = code
+        self.send_response(code)
         self.send_header("content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"<h1>404</h1>")
-
-    def send_500(self):
-        self.send_response(500)
-        self.send_header("content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(b"<h1>500</h1>")
+        self.wfile.write(f"<h1>{msg}</h1>".encode())
 
     def send_200(self, data, ctype="text/html"):
         self.send_response(200)
