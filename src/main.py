@@ -18,20 +18,14 @@
 #
 
 import sys
-import time
 from http.server import HTTPServer
 from handler import RequestHandler
-
-UPTIME = 18000   # 5 hours
 
 
 def main():
     port = 80 if len(sys.argv) == 1 else int(sys.argv[1])
     server = HTTPServer(("", port), RequestHandler)
-
-    start = time.time()
-    while time.time()-start < UPTIME:
-        server.handle_request()
+    server.serve_forever()
 
 
 main()
