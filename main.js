@@ -1,3 +1,4 @@
+let category;
 let correct_ind;
 let user_prompt;
 let user_correct;
@@ -32,12 +33,13 @@ function setChoice(index, content) {
 
 function initialize() {
     document.getElementById("last").style.display = "none";
+    category = "spanish";
     setContent();
 }
 
 
 function setContent() {
-    let json = fetch("./content/test.json").then(response => response.json());
+    let json = fetch("./content/" + category + ".json").then(response => response.json());
     json.then(function(data) {
         correct_ind = randint(0, 4);
         let correct = randint(0, data.length);
