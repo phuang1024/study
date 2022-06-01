@@ -30,6 +30,5 @@ p, a {
 }
 
 a, .click {
-    color: #aaaaaa;
     text-decoration: underline;
 }
