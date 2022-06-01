@@ -1,41 +1,494 @@
 [
-    ["la vida diaria", "the daily life"],
-    ["el tiempo libre", "the free time"],
-    ["el/la joven", "the young person"],
-    ["la libertad", "the freedom"],
-    ["la encuesta", "the survey"],
-    ["el idioma", "the language"],
-    ["el quehacer", "the chore"],
-    ["la tarea", "the homework"],
-    ["el/la siguiente", "the next"],
-    ["el horario", "the schedule"],
-    ["adivinar", "to guess"],
-    ["responder", "to respond"],
-    ["el desayuno", "the breakfast"],
-    ["desayunar", "to eat breakfast"],
-    ["el almuerzo", "the lunch"],
-    ["almorzar", "to eat lunch"],
-    ["la cena", "the dinner"],
-    ["cenar", "to eat dinner"],
-    ["arreglar el cuarto", "to organize the room"],
-    ["darle de comer", "to feed"],
-    ["cortar el ce'sped", "to mow the lawn"],
-    ["pasar la aspiradora", "to use the vacuum cleaner"],
-    ["salir a pasear", "to leave for a walk"],
-    ["charlar", "to chat"],
-    ["ir de compras", "to go shopping"],
-    ["reunirse", "to meet"],
-    ["ir de vacaciones", "to go on vacations"],
-    ["tener una cita", "to have an appointment"],
-    ["ir a un desfile", "to go to a parade"],
-    ["ver fuegos artificiales", "to see fireworks"],
-    ["por supuesto", "of course"],
-    ["antes", "before"],
-    ["despues", "after"],
-    ["lo que", "what"],
-    ["al mismo tiempo", "at the same time"],
-    ["juntos/as", "together"],
-    ["inolvidable", "unforgettable"],
-    ["ti'pico", "typical"],
-    ["estupendo/a", "stupendous"]
+    [
+        "la vida diaria",
+        "the daily life"
+    ],
+    [
+        "el tiempo libre",
+        "the free time"
+    ],
+    [
+        "el/la joven",
+        "the young person"
+    ],
+    [
+        "la libertad",
+        "the freedom"
+    ],
+    [
+        "la encuesta",
+        "the survey"
+    ],
+    [
+        "el idioma",
+        "the language"
+    ],
+    [
+        "el quehacer",
+        "the chore"
+    ],
+    [
+        "la tarea",
+        "the homework"
+    ],
+    [
+        "el/la siguiente",
+        "the next"
+    ],
+    [
+        "el horario",
+        "the schedule"
+    ],
+    [
+        "adivinar",
+        "to guess"
+    ],
+    [
+        "responder",
+        "to respond"
+    ],
+    [
+        "el desayuno",
+        "the breakfast"
+    ],
+    [
+        "desayunar",
+        "to eat breakfast"
+    ],
+    [
+        "el almuerzo",
+        "the lunch"
+    ],
+    [
+        "almorzar",
+        "to eat lunch"
+    ],
+    [
+        "la cena",
+        "the dinner"
+    ],
+    [
+        "cenar",
+        "to eat dinner"
+    ],
+    [
+        "arreglar el cuarto",
+        "to organize the room"
+    ],
+    [
+        "darle de comer",
+        "to feed"
+    ],
+    [
+        "cortar el ce'sped",
+        "to mow the lawn"
+    ],
+    [
+        "pasar la aspiradora",
+        "to use the vacuum cleaner"
+    ],
+    [
+        "salir a pasear",
+        "to leave for a walk"
+    ],
+    [
+        "charlar",
+        "to chat"
+    ],
+    [
+        "ir de compras",
+        "to go shopping"
+    ],
+    [
+        "reunirse",
+        "to meet"
+    ],
+    [
+        "ir de vacaciones",
+        "to go on vacations"
+    ],
+    [
+        "tener una cita",
+        "to have an appointment"
+    ],
+    [
+        "ir a un desfile",
+        "to go to a parade"
+    ],
+    [
+        "ver fuegos artificiales",
+        "to see fireworks"
+    ],
+    [
+        "por supuesto",
+        "of course"
+    ],
+    [
+        "antes",
+        "before"
+    ],
+    [
+        "despues",
+        "after"
+    ],
+    [
+        "lo que",
+        "what"
+    ],
+    [
+        "al mismo tiempo",
+        "at the same time"
+    ],
+    [
+        "juntos/as",
+        "together"
+    ],
+    [
+        "inolvidable",
+        "unforgettable"
+    ],
+    [
+        "ti'pico",
+        "typical"
+    ],
+    [
+        "estupendo/a",
+        "stupendous"
+    ],
+    [
+        "bello/a",
+        "beautiful"
+    ],
+    [
+        "arti'stico/a",
+        "artistic"
+    ],
+    [
+        "talentoso/a",
+        "talented"
+    ],
+    [
+        "despacio/a",
+        "slow"
+    ],
+    [
+        "divertido/a",
+        "fun"
+    ],
+    [
+        "emocionante",
+        "exciting"
+    ],
+    [
+        "exagerado/a",
+        "outrageous"
+    ],
+    [
+        "acercarse a",
+        "to approach"
+    ],
+    [
+        "andar",
+        "to walk"
+    ],
+    [
+        "dar un paseo",
+        "to take a walk"
+    ],
+    [
+        "el sendero",
+        "the path"
+    ],
+    [
+        "hacer senderismo",
+        "to go hiking"
+    ],
+    [
+        "dejar de",
+        "to stop"
+    ],
+    [
+        "escalar",
+        "to climb"
+    ],
+    [
+        "perderse",
+        "to get lost"
+    ],
+    [
+        "refugiarse",
+        "to take shelter"
+    ],
+    [
+        "el bosque",
+        "the forest"
+    ],
+    [
+        "el desierto",
+        "the desert"
+    ],
+    [
+        "hermoso/a",
+        "beautiful"
+    ],
+    [
+        "la naturaleza",
+        "the nature"
+    ],
+    [
+        "el paisaje",
+        "the landscape"
+    ],
+    [
+        "el refugio",
+        "the shelter"
+    ],
+    [
+        "la roca",
+        "the rock"
+    ],
+    [
+        "la sierra",
+        "the mountains"
+    ],
+    [
+        "el valle",
+        "the valley"
+    ],
+    [
+        "los binoculares",
+        "the binoculars"
+    ],
+    [
+        "la bru'jula",
+        "the compass"
+    ],
+    [
+        "la linterna",
+        "the flashlight"
+    ],
+    [
+        "el repelente de insectos",
+        "the insect repellent"
+    ],
+    [
+        "el saco de dormir",
+        "the sleeping bag"
+    ],
+    [
+        "la tienda de acampar",
+        "the tent"
+    ],
+    [
+        "caer granizo",
+        "to hail"
+    ],
+    [
+        "el granizo",
+        "the hail"
+    ],
+    [
+        "el rela'mpago",
+        "the lightning"
+    ],
+    [
+        "el trueno",
+        "the thunder"
+    ],
+    [
+        "tronar",
+        "to thunder"
+    ],
+    [
+        "mojado/a",
+        "wet"
+    ],
+    [
+        "seco/a",
+        "dry"
+    ],
+    [
+        "suceder",
+        "to happen"
+    ],
+    [
+        "tener lugar",
+        "to take place"
+    ],
+    [
+        "al amanecer",
+        "at dawn"
+    ],
+    [
+        "al anochecer",
+        "at dusk"
+    ],
+    [
+        "al principio",
+        "at the beginning"
+    ],
+    [
+        "al aire libre",
+        "outdoors"
+    ],
+    [
+        "un rato",
+        "a while"
+    ],
+    [
+        "una vez alli'",
+        "once there"
+    ],
+    [
+        "el entrenamiento",
+        "the training"
+    ],
+    [
+        "entrenarse",
+        "to train"
+    ],
+    [
+        "hacer un esfuerzo",
+        "to make an effort"
+    ],
+    [
+        "inscribirse",
+        "to sign up"
+    ],
+    [
+        "la inscripcio'n",
+        "the registration"
+    ],
+    [
+        "alcanzar",
+        "to reach"
+    ],
+    [
+        "la carrera",
+        "the race"
+    ],
+    [
+        "la ceremonia",
+        "the ceremony"
+    ],
+    [
+        "el certificado",
+        "the certificate"
+    ],
+    [
+        "contra",
+        "against"
+    ],
+    [
+        "eliminar",
+        "to eliminate"
+    ],
+    [
+        "la entrega de premios",
+        "the award ceremony"
+    ],
+    [
+        "felicitaciones",
+        "congratulations"
+    ],
+    [
+        "la medalla",
+        "the medal"
+    ],
+    [
+        "la meta",
+        "the goal"
+    ],
+    [
+        "obtener",
+        "to obtain"
+    ],
+    [
+        "el/la participante",
+        "the participant"
+    ],
+    [
+        "el/la representante",
+        "the representative"
+    ],
+    [
+        "salir campeo'n",
+        "to become the champion"
+    ],
+    [
+        "el trofeo",
+        "the trophy"
+    ],
+    [
+        "vencer",
+        "to beat"
+    ],
+    [
+        "animado/a",
+        "excited"
+    ],
+    [
+        "desanimado/a",
+        "not excited"
+    ],
+    [
+        "asustar",
+        "to scare"
+    ],
+    [
+        "darse cuenta de",
+        "to realize"
+    ],
+    [
+        "desafortunadamente",
+        "unfortunately"
+    ],
+    [
+        "duro/a",
+        "hard"
+    ],
+    [
+        "emocionarse",
+        "to get excited"
+    ],
+    [
+        "estar orgulloso/a de",
+        "to be proud of"
+    ],
+    [
+        "impresionar",
+        "to impress"
+    ],
+    [
+        "pasarlo bien",
+        "to have a good time"
+    ],
+    [
+        "disfrutar de",
+        "to enjoy"
+    ],
+    [
+        "aparecer",
+        "to appear"
+    ],
+    [
+        "asi'",
+        "this way"
+    ],
+    [
+        "hacia",
+        "toward"
+    ],
+    [
+        "perder el equilibrio",
+        "to lose balance"
+    ],
+    [
+        "sin embargo",
+        "however"
+    ],
+    [
+        "esconderse",
+        "to hide"
+    ]
 ]
