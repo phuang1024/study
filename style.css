@@ -29,7 +29,7 @@ p, a {
     margin-bottom: 0.4em;
 }
 
-a {
+a, .click {
     color: #aaaaaa;
     text-decoration: underline;
 }

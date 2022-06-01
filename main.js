@@ -25,6 +25,8 @@ function setChoice(index, content) {
 }
 
 function setContent() {
+    //document.getElementById("last").style.visibility = "show";
+
     let json = fetch("./content/test.json").then(response => response.json());
     json.then(function(data) {
         correct_ind = randint(0, 4);

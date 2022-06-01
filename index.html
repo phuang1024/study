@@ -9,13 +9,18 @@
         <script src="./main.js"></script>
     </head>
 
-    <body>
+    <body onload="setContent()">
         <h1>Study</h1>
-        <button type="button" onclick="setContent()">Test</button>
-        <p id="ans">Answer</p>
-        <p id="word1">Word 1</p>
-        <p id="word2">Word 2</p>
-        <p id="word3">Word 3</p>
-        <p id="word4">Word 4</p>
+
+        <div id="choices">
+            <p id="ans">Answer</p>
+            <p class="click" id="word1" onclick="answer(0)">Word 1</p>
+            <p class="click" id="word2" onclick="answer(1)">Word 2</p>
+            <p class="click" id="word3" onclick="answer(2)">Word 3</p>
+            <p class="click" id="word4" onclick="answer(3)">Word 4</p>
+        </div>
+
+        <div id="last">
+        </div>
     </body>
 </html>
